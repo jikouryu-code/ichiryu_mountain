@@ -192,7 +192,8 @@ st.divider()
 # 📊 鑑定結果の表示ロジック
 # ==========================================
 if selected_core in star_data:
-    st.markdown(f"## 【{selected_core}】とは？")
+    # 🚨 ここを修正しました！
+    st.markdown("## 中心星とは？") 
     st.markdown(star_data[selected_core]["基本解説"])
     
     st.divider()
