@@ -1,78 +1,100 @@
 import streamlit as st
 import base64
+import re
 
-# ==========================================
-# 🔐 パスワード認証機能
-# ==========================================
-PASSWORD = "mountain2026"
+# ===== 🔐 パスワード =====
+PASSWORD = "forest2026"
 
 if "auth" not in st.session_state:
     st.session_state.auth = False
 
 if not st.session_state.auth:
-    st.title("鑑定辞典『風林火山』〜山の巻〜")
     pwd = st.text_input("パスワードを入力してください", type="password")
     if pwd == PASSWORD:
         st.session_state.auth = True
         st.rerun()
     else:
-        if pwd != "":
-            st.error("パスワードが違います")
         st.stop()
 
-# ==========================================
-# 🎨 背景画像とCSSデザイン
-# ==========================================
-# ※ご自身の環境に合わせて画像ファイル名（kaze.png や yama.png など）を変更してください
-@st.cache_data
+# ===== 画像読み込み =====
 def get_base64(file):
     try:
         with open(file, "rb") as f:
             return base64.b64encode(f.read()).decode()
     except FileNotFoundError:
-        return "" # 画像がない場合はスキップ
+        return ""
 
-img = get_base64("kaze.png") # 🚨ここはお手元の画像ファイル名に合わせてください
+# ※必要に応じて背景画像ファイル名を変更してください（例: hayashi.png）
+img = get_base64("kaze.png") 
 
-# CSSの適用（誤字を修正し、美しいレイアウトに整えました）
-if img:
-    bg_css = f"""
-    .stApp {{
-        background-image: url("data:image/png;base64,{img}");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }}
-    """
-else:
-    bg_css = ""
-
+# ===== CSS =====
 st.markdown(f"""
 <style>
+/* ===== フォント ===== */
 body, .stApp, p, div, span, label, h1, h2, h3 {{
-    font-family: "Hiragino Mincho ProN","Yu Mincho","MS Mincho",serif;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", serif;
 }}
-input, textarea, select {{
-    font-family: "Hiragino Mincho ProN","Yu Mincho","MS Mincho",serif;
+
+/* 入力欄 */
+input, textarea {{
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", serif;
 }}
-{bg_css}
+
+/* ===== カテゴリ余白 ===== */
+div[role="radiogroup"] label {{
+   padding: 14px 12px;
+   line-height: 1.6;
+   font-size: 14px;
+}}
+
+/* 全体行間 */
+p, div, span {{
+    line-height: 1.7;
+}}
+
+/* ===== 高さ ===== */
+html, body, .stApp {{
+    height: 100%;
+    min-height: 100vh;
+}}
+
+/* ===== 背景 ===== */
+.stApp {{
+    background-image: url("data:image/png;base64,{img}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}}
+
+/* ===== オーバーレイ ===== */
 .stApp::before {{
     content: "";
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(255,255,255,0.85); /* 背景の白っぽさ（0.85で少し濃いめに設定） */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.8);
     z-index: 0;
 }}
+
+/* ===== 前面 ===== */
 .main > div {{
     position: relative;
     z-index: 1;
 }}
-h1, h2, h3 {{ color: #000000; }}
-p, div, span, label {{ color: #111111; line-height: 1.8; }}
+
+/* ===== 文字色 ===== */
+h1, h2, h3 {{
+    color: #000000;
+}}
+
+p, div, span, label {{
+    color: #111111;
+}}
 </style>
 """, unsafe_allow_html=True)
-
 # ==========================================
 # 📖 鑑定データ（辞典の内容）
 # ==========================================
