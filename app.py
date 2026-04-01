@@ -3,10 +3,10 @@ import base64
 import re  # 🚨 ← この1行を追加するだけです！
 
 # ===== 🔐 パスワード =====
-PASSWORD = "fire2026"
+PASSWORD = "mountain2026"
 
 # ===== 🔐 パスワード =====
-PASSWORD = "fire2026"
+PASSWORD = "mountain2026"
 
 if "auth" not in st.session_state:
     st.session_state.auth = False
