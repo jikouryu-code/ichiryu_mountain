@@ -3,7 +3,7 @@ import base64
 import re
 
 # ===== 🔐 パスワード =====
-PASSWORD = "forest2026"
+PASSWORD = "mountain2026"
 
 if "auth" not in st.session_state:
     st.session_state.auth = False
