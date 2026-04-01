@@ -10,7 +10,7 @@ if "auth" not in st.session_state:
     st.session_state.auth = False
 
 if not st.session_state.auth:
-    st.title("鑑定辞典『風林火山』〜山の巻〜")
+    st.title("一龍聖典『風林火山』〜山の巻〜")
     pwd = st.text_input("パスワードを入力してください", type="password")
     if pwd == PASSWORD:
         st.session_state.auth = True
