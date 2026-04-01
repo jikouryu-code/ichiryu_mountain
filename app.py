@@ -173,10 +173,19 @@ star_data = {
 # ==========================================
 # 🖥️ アプリの画面デザイン（UI）
 # ==========================================
-st.title("鑑定辞典『風林火山』〜山の巻〜")
+# 🚨 先生のブランド「一龍聖典」の美しい縦積みデザインを再現しました
+st.markdown("""
+<div style="text-align: left; margin-bottom: 20px;">
+    <h1 style="font-size: 3.5rem; margin-bottom: 0.1em; letter-spacing: 0.1em;">一龍聖典</h1>
+    <h2 style="font-size: 2.8rem; margin-top: 0; margin-bottom: 0.3em; letter-spacing: 0.1em;">〜山の巻〜</h2>
+    <h3 style="font-size: 1.4rem; font-weight: normal; margin-top: 0;">四柱推命・中心星</h3>
+</div>
+""", unsafe_allow_html=True)
+
 st.write("中心星と十二運を選択すると、一生変わらない本質と動向が表示されます。")
 
 col1, col2 = st.columns(2)
+# （以下、今まで通りのプルダウンのコードが続きます）
 
 with col1:
     core_stars = ["比肩", "劫財", "食神", "傷官", "正財", "偏財", "正官", "偏官", "印綬", "偏印"]
